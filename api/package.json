@@ -1,0 +1,25 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "author": "Pedrin",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsnd --ignore-watch node_modules src/server.ts",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migrate": "typeorm-ts-node-commonjs migration:generate ./src/migrations/customersEntity -d ./src/data-source.ts",
+    "run-migrations": "typeorm-ts-node-commonjs migration:run -d ./src/data-source"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.17",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "pg": "^8.11.3",
+    "typeorm": "^0.3.11",
+    "typescript": "^5.1.6",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0"
+  }
+}
