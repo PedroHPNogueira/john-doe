@@ -9,5 +9,6 @@ export const createCustomerController = async (req: Request, res: Response) => {
 
 export const getCustomersController = async (req: Request, res: Response) => {
   const customers = await getCustomersService()
+  console.log(req.query)
   return res.status(200).json({customers})
 }
