@@ -1,9 +1,15 @@
 import { Router } from "express"
 import ensureDataIsValidMiddleware from "../middlewares/ensureDataIsValid.middleware"
 import { customerRequestSerializer } from "../serializers/customers.serializer"
-import { createCustomerController, getCustomersController } from "../controllers/customers/customers.controllers"
+import { createCustomerController, getCustomersController, verifyCustomerExistsController } from "../controllers/customers/customers.controllers"
 
 const customerRouter: Router = Router()
+
+customerRouter.get(
+  "/verify",
+  verifyCustomerExistsController
+)
+
 
 customerRouter.post(
   "",
