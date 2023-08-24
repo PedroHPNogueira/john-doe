@@ -36,8 +36,13 @@ export const FixedColorsForm = () => {
   ]
 
   const navigate = useNavigate()
-  const { customerInCreation, setCustomerInCreation, selectedOption, setSelectedOption, setCustomSelectedOption} =
-    useContext(RegisterContext)
+  const {
+    customerInCreation,
+    setCustomerInCreation,
+    selectedOption,
+    setSelectedOption,
+    setCustomSelectedOption,
+  } = useContext(RegisterContext)
 
   const {
     register,
@@ -52,7 +57,6 @@ export const FixedColorsForm = () => {
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value)
-    console.log(selectedOption)
   }
 
   const submitFavoriteColor = (data: IFavoriteColor) => {
@@ -82,13 +86,7 @@ export const FixedColorsForm = () => {
   }, [])
 
   return (
-    <form
-      /* variants={cardsAnimations}  */
-      /* animate="enter"
-      exit="exit" */
-      id="teste"
-      onSubmit={handleSubmit(submitFavoriteColor)}
-    >
+    <form id="teste" onSubmit={handleSubmit(submitFavoriteColor)}>
       <fieldset>
         <legend>Selecione sua cor favorita:</legend>
         <div>
@@ -123,9 +121,12 @@ export const FixedColorsForm = () => {
         {selectedOption !== "" ? (
           <>
             <Button
+              type="button"
               className="returnButton"
               variant="secondary"
-              onClick={() => navigate("/register/identify")}
+              onClick={() => {
+                navigate("/register/identify")
+              }}
             >
               Voltar
             </Button>

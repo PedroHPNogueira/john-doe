@@ -1,0 +1,13 @@
+FROM node
+
+WORKDIR /register
+
+COPY package*.json /register
+
+RUN yarn install
+
+COPY . /register
+
+EXPOSE 3000
+
+CMD ["yarn", "run", "dev"]

@@ -7,7 +7,8 @@ import { Button } from "../../../styles/button"
 import { INotes } from "../../../interfaces/customerInterfaces"
 import { notesSerializer } from "../../../schemas/userSchemas"
 import { RegisterContext } from "../../../contexts/registerContext"
-
+import { createCustomer } from "../../../api"
+import { toast } from "react-toastify"
 export const NotesForm = () => {
   const navigate = useNavigate()
 
@@ -24,15 +25,28 @@ export const NotesForm = () => {
     },
   })
 
-  const submitNotes = (data: INotes) => {
+  const submitNotes = async (data: INotes) => {
     const notes = data.notes
     let customer = customerInCreation
     customer = { ...customerInCreation, notes: notes }
     setCustomerInCreation(customer)
+
+    const customerCreated = await createCustomer(customer)
+
+    if (customerCreated) {
+      setCustomerInCreation({})
+      navigate("/register/success")
+      toast.success("Cadastro realizado com sucesso!")
+    }
   }
 
   useEffect(() => {
-    if (!customerInCreation.favoriteColor) {
+    if (
+      !customerInCreation.favoriteColor ||
+      !customerInCreation.name ||
+      !customerInCreation.email ||
+      !customerInCreation.cpf
+    ) {
       navigate("/register/favoriteColor")
     }
   })
@@ -55,7 +69,7 @@ export const NotesForm = () => {
             navigate("/register/favoriteColor")
           }}
         >
-          voltar
+          Voltar
         </Button>
         <Button variant="primary" className="nextButton" type="submit">
           Finalizar cadastro

@@ -37,13 +37,13 @@ export const FavoriteColorDiv = styled.main<IPreviewColor>`
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
+    height: 80px;
 
     text-align: start;
 
     font-size: 16px;
     line-height: 24px;
     font-weight: 500;
-    margin-bottom: 10px;
   }
 
   fieldset legend {
@@ -65,19 +65,21 @@ export const FavoriteColorDiv = styled.main<IPreviewColor>`
   }
 
   form p {
-    position: absolute;
-    bottom: -26px;
-    left: 5px;
+    margin-top: 5px;
     color: #ff2222;
     font-size: 14px;
     font-weight: 500;
+
+    margin: 0 auto;
   }
 
   .customColorInputDiv {
     display: flex;
     align-items: start;
-    height: 37px;
-    gap: 0px;
+    flex-direction: column;
+    height: 60px;
+    gap: 5px;
+    margin-top: -6px;
     margin-bottom: 30px;
 
     align-items: center;
@@ -109,13 +111,13 @@ export const FavoriteColorDiv = styled.main<IPreviewColor>`
 
   .nextButtonF {
     position: absolute;
-    bottom: -220px;
+    bottom: -197px;
     right: -40px;
   }
 
   .returnButtonF {
     position: absolute;
-    bottom: -220px;
+    bottom: -197px;
     right: 172px;
   }
 
@@ -173,13 +175,13 @@ export const FavoriteColorDiv = styled.main<IPreviewColor>`
 
     .nextButtonF {
       position: absolute;
-      bottom: -200px;
+      bottom: -177px;
       right: -40px;
     }
 
     .returnButtonF {
       position: absolute;
-      bottom: -200px;
+      bottom: -177px;
       right: 150px;
     }
 
@@ -246,13 +248,13 @@ export const FavoriteColorDiv = styled.main<IPreviewColor>`
 
     .nextButtonF {
       position: absolute;
-      bottom: -150px;
+      bottom: -127px;
       right: -35px;
     }
 
     .returnButtonF {
       position: absolute;
-      bottom: -150px;
+      bottom: -127px;
       right: 115px;
     }
 
@@ -313,13 +315,13 @@ export const FavoriteColorDiv = styled.main<IPreviewColor>`
 
     .nextButtonF {
       position: absolute;
-      bottom: -110px;
+      bottom: -87px;
       right: -20px;
     }
 
     .returnButtonF {
       position: absolute;
-      bottom: -110px;
+      bottom: -87px;
       right: 100px;
     }
 

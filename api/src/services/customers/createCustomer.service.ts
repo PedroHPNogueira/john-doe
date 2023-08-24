@@ -4,7 +4,7 @@ import AppError from "../../errors/AppError"
 import { ICustomer, ICustomerRequest } from "../../interfaces/customers.interfaces"
 import { customerSerializer } from "../../serializers/customers.serializer"
 
-const createCustomerService = async (customerPayload: ICustomerRequest): Promise<ICustomer> => {
+export const createCustomerService = async (customerPayload: ICustomerRequest): Promise<ICustomer> => {
   const customerRepository = AppDataSource.getRepository(Customer)
 
   const customerVerify: Customer[] = await customerRepository.find({
@@ -22,5 +22,3 @@ const createCustomerService = async (customerPayload: ICustomerRequest): Promise
     stripUnknown: true,
   })
 }
-
-export default createCustomerService

@@ -14,7 +14,7 @@ export const FavoriteColorForm = () => {
     if (!customerInCreation.name) {
       navigate("/register/identify")
     }
-  },[])
+  })
 
   return (
     <FavoriteColorDiv previewColor={selectedOption} customPreviewColor={customSelectedOption}>

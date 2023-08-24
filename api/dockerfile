@@ -1,0 +1,11 @@
+FROM node
+
+WORKDIR /api
+
+COPY package*.json /api
+
+RUN yarn install
+
+COPY . /api
+
+CMD ["yarn", "run", "prod"]

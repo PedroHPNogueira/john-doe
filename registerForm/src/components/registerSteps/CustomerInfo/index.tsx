@@ -1,26 +1,19 @@
+import { useState, useContext, useEffect } from "react"
 import { useForm } from "react-hook-form"
+import { toast } from "react-toastify"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { useNavigate } from "react-router-dom"
+
 import { CustomerInfoDiv } from "./style"
-import { useState, useContext } from "react"
+import { Button } from "../../../styles/button"
 import { ICustomerInfo } from "../../../interfaces/customerInterfaces"
 import { RegisterContext } from "../../../contexts/registerContext"
-import { useNavigate } from "react-router-dom"
 import { customerInfoSerializer } from "../../../schemas/userSchemas"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { Button } from "../../../styles/button"
-
+import { verifyIfCustomerExists } from "../../../api"
 export const CustomerInfo = () => {
   const [cpf, setCpf] = useState("")
-  const {  customerInCreation, setCustomerInCreation } = useContext(RegisterContext)
+  const { customerInCreation, setCustomerInCreation } = useContext(RegisterContext)
   const navigate = useNavigate()
-
-  const submitCustomerInfo = (data: ICustomerInfo) => {
-    console.log("oi")
-    let customer = customerInCreation
-    customer = {...customerInCreation,...data}
-    setCustomerInCreation(customer)
-
-    navigate("/register/favoriteColor")
-}
 
   const {
     register,
@@ -36,23 +29,53 @@ export const CustomerInfo = () => {
   })
 
   const formatCPF = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.value) return
     const cpfRaw: string = e.target.value.replace(/[^\d]/g, "")
     const cpf = cpfRaw.slice(0, 11)
 
     setCpf(cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"))
   }
 
+  const submitCustomerInfo = async (data: ICustomerInfo) => {
+    data.cpf = data.cpf.replace(/[^\d]/g, "")
+
+    const customerVerify = await verifyIfCustomerExists(data.cpf, data.email)
+
+    if (!customerVerify) return
+
+    if (customerVerify?.email) {
+      toast.error("Email já cadastrado!")
+      return
+    }
+
+    if (customerVerify?.cpf) {
+      toast.error("CPF já cadastrado!")
+      return
+    }
+
+    let customer = customerInCreation
+    customer = { ...customerInCreation, ...data }
+    setCustomerInCreation(customer)
+
+    navigate("/register/favoriteColor")
+  }
+
+  useEffect(() => {
+    formatCPF({ target: { value: customerInCreation.cpf } } as React.ChangeEvent<HTMLInputElement>)
+  },[])
+
   return (
     <CustomerInfoDiv>
       <form
-      /* variants={cardsAnimations}  */
-      /* animate="enter"
-      exit="exit" */
-      onSubmit={handleSubmit(submitCustomerInfo)}
+        onSubmit={handleSubmit(submitCustomerInfo)}
       >
         <div className="inputDiv">
           <label>Nome</label>
-          <input type="text" {...register("name")} placeholder="Cristiano Ronaldo dos Santos Aveiro" />
+          <input
+            type="text"
+            {...register("name")}
+            placeholder="Cristiano Ronaldo dos Santos Aveiro"
+          />
           <p>{errors.name?.message}</p>
         </div>
         <div className="twoInputsDiv">

@@ -27,7 +27,7 @@ export const CustomColorsForm = () => {
   })
 
   const handleCustomValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value
+    const value: string = event.target.value.slice(0, 6)
     setCustomSelectedOptionPrev(value)
     if (value.match(/^[a-fA-F0-9]{6}$/)) {
       setCustomSelectedOption(value)
@@ -46,7 +46,10 @@ export const CustomColorsForm = () => {
   }
 
   return (
-    <form className="customColorInputDiv" onSubmit={handleSubmit(submitCustomColor)}>
+    <form
+      className="customColorInputDiv"
+      onSubmit={handleSubmit(submitCustomColor)}
+    >
       {selectedOption === "" ? (
         <>
           <input
@@ -59,9 +62,12 @@ export const CustomColorsForm = () => {
           <p>{errors.customColor?.message}</p>
           <div className="buttonDiv">
             <Button
+              type="button"
               className="returnButtonF"
               variant="secondary"
-              onClick={() => navigate("/register/identify")}
+              onClick={() => {
+                navigate("/register/identify")
+              }}
             >
               Voltar
             </Button>

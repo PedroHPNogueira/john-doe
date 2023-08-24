@@ -9,6 +9,18 @@ const setDataSourceConfig = (): DataSourceOptions => {
 
   const port = process.env.PGPORT ? parseInt(process.env.PGPORT) : 5432
 
+  const isDockerCompose = process.env.DOCKER_COMPOSE
+
+  if (isDockerCompose) {
+    return {
+      type: "postgres",
+      url: process.env.DATABASE_URL,
+      synchronize: false,
+      entities: [entitiesPath],
+      migrations: [migrationsPath],
+    }
+  }
+
   return {
     type: "postgres",
     host: process.env.PGHOST,

@@ -1,12 +1,7 @@
 import AppDataSource from "../../data-source"
+import QueryString from "qs"
 import Customer from "../../entities/customers.entitie"
 import AppError from "../../errors/AppError"
-import QueryString from "qs"
-
-interface IQuery {
-  cpf: string
-  email: string
-}
 
 interface IResponseObject {
   cpf: boolean

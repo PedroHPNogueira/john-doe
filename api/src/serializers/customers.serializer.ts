@@ -1,6 +1,7 @@
-import { ICustomer } from "./../interfaces/customers.interfaces"
 import * as yup from "yup"
 import { SchemaOf } from "yup"
+
+import { ICustomer } from "../interfaces/customers.interfaces"
 import { ICustomerRequest } from "../interfaces/customers.interfaces"
 
 const customerRequestSerializer: SchemaOf<ICustomerRequest> = yup.object().shape({
