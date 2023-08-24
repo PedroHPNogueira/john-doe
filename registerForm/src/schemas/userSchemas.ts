@@ -3,7 +3,7 @@ import * as yup from "yup"
 export const customerInfoSerializer = yup.object().shape({
   name: yup.string().required("Campo obrigatório!"),
   email: yup.string().email("Email inválido!").required("Campo obrigatório!"),
-  cpf: yup.string().required("Campo obrigatório!").matches(/[^\d]/g, "CPF Inválido!"),
+  cpf: yup.string().required("Campo obrigatório!").matches(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/g, "CPF Inválido!"),
 })
 
 export const favoriteColorSerializer = yup.object().shape({

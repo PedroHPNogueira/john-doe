@@ -3,13 +3,16 @@ import { useForm } from "react-hook-form"
 import { toast } from "react-toastify"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useNavigate } from "react-router-dom"
+import { motion as m } from "framer-motion"
 
+import { formAnimation } from "../../../animations"
 import { CustomerInfoDiv } from "./style"
 import { Button } from "../../../styles/button"
 import { ICustomerInfo } from "../../../interfaces/customerInterfaces"
 import { RegisterContext } from "../../../contexts/registerContext"
 import { customerInfoSerializer } from "../../../schemas/userSchemas"
 import { verifyIfCustomerExists } from "../../../api"
+
 export const CustomerInfo = () => {
   const [cpf, setCpf] = useState("")
   const { customerInCreation, setCustomerInCreation } = useContext(RegisterContext)
@@ -62,11 +65,14 @@ export const CustomerInfo = () => {
 
   useEffect(() => {
     formatCPF({ target: { value: customerInCreation.cpf } } as React.ChangeEvent<HTMLInputElement>)
-  },[])
+  }, [])
 
   return (
     <CustomerInfoDiv>
-      <form
+      <m.form
+        variants={formAnimation}
+        animate="enter"
+        exit="exit"
         onSubmit={handleSubmit(submitCustomerInfo)}
       >
         <div className="inputDiv">
@@ -99,7 +105,7 @@ export const CustomerInfo = () => {
         <Button variant="primary" type="submit">
           Próximo passo
         </Button>
-      </form>
+      </m.form>
     </CustomerInfoDiv>
   )
 }

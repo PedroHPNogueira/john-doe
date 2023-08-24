@@ -1,10 +1,11 @@
 import { useContext } from "react"
-import { RegisterContext } from "../../../../contexts/registerContext"
-import { Button } from "../../../../styles/button"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import { ICustomColor } from "../../../../interfaces/customerInterfaces"
 import { yupResolver } from "@hookform/resolvers/yup"
+
+import { RegisterContext } from "../../../../contexts/registerContext"
+import { Button } from "../../../../styles/button"
+import { ICustomColor } from "../../../../interfaces/customerInterfaces"
 import { customColorSerializer } from "../../../../schemas/userSchemas"
 
 export const CustomColorsForm = () => {

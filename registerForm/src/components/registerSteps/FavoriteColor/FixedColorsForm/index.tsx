@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form"
-import { IFavoriteColor } from "../../../../interfaces/customerInterfaces"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { favoriteColorSerializer } from "../../../../schemas/userSchemas"
 import { useNavigate } from "react-router-dom"
 import { useContext, useEffect } from "react"
+import { yupResolver } from "@hookform/resolvers/yup"
+
+import { IFavoriteColor } from "../../../../interfaces/customerInterfaces"
+import { favoriteColorSerializer } from "../../../../schemas/userSchemas"
 import { RegisterContext } from "../../../../contexts/registerContext"
 import { Button } from "../../../../styles/button"
 

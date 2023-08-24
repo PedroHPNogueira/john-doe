@@ -1,11 +1,11 @@
-import { RegisterMain } from "./styles"
-import { Background } from "../../components/Background"
-import { Outlet, useLocation } from "react-router-dom"
 import { useEffect } from "react"
-
+import { Outlet, useLocation } from "react-router-dom"
 import { BsPersonFill as Person } from "react-icons/bs"
 import { CgFileDocument as Document } from "react-icons/cg"
 import { IoMdColorPalette as ColorPalete } from "react-icons/io"
+
+import { RegisterMain } from "./styles"
+import { Background } from "../../components/Background"
 
 export const RegisterPage = () => {
   const location = useLocation()

@@ -1,14 +1,18 @@
-import { MoreAboutDiv } from "./style"
+import { toast } from "react-toastify"
 import { useContext, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useNavigate } from "react-router-dom"
+import { motion as m } from "framer-motion"
+
+import { MoreAboutDiv } from "./style"
 import { Button } from "../../../styles/button"
 import { INotes } from "../../../interfaces/customerInterfaces"
 import { notesSerializer } from "../../../schemas/userSchemas"
 import { RegisterContext } from "../../../contexts/registerContext"
 import { createCustomer } from "../../../api"
-import { toast } from "react-toastify"
+import { formAnimation } from "../../../animations"
+
 export const NotesForm = () => {
   const navigate = useNavigate()
 
@@ -24,6 +28,10 @@ export const NotesForm = () => {
       notes: customerInCreation.notes,
     },
   })
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCustomerInCreation({ ...customerInCreation, notes: e.target.value })
+  }
 
   const submitNotes = async (data: INotes) => {
     const notes = data.notes
@@ -53,12 +61,15 @@ export const NotesForm = () => {
 
   return (
     <MoreAboutDiv>
-      <form
+      <m.form
+        variants={formAnimation}
+        animate="enter"
+        exit="exit"
         onSubmit={handleSubmit(submitNotes)}
       >
         <div className="inputDiv">
           <label>Deixe aqui suas observaçções:</label>
-          <textarea {...register("notes")} />
+          <textarea {...register("notes")} onChange={handleChange} />
           <p>{errors.notes?.message}</p>
         </div>
         <Button
@@ -74,7 +85,7 @@ export const NotesForm = () => {
         <Button variant="primary" className="nextButton" type="submit">
           Finalizar cadastro
         </Button>
-      </form>
+      </m.form>
     </MoreAboutDiv>
   )
 }

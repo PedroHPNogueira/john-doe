@@ -1,9 +1,10 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom"
+import { AnimatePresence } from "framer-motion"
+
 import { RegisterPage } from "../pages/registerPage"
 import { CustomerInfo } from "../components/registerSteps/CustomerInfo"
 import { FavoriteColorForm } from "../components/registerSteps/FavoriteColor"
 import { NotesForm } from "../components/registerSteps/NotesForm"
-import { AnimatePresence } from "framer-motion"
 
 export const RoutesComponent = () => {
   const location = useLocation()

@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom"
+import { useContext, useEffect } from "react"
+import { motion as m } from "framer-motion"
+
 import { FavoriteColorDiv } from "./style"
 import { FixedColorsForm } from "./FixedColorsForm"
-import { useContext, useEffect } from "react"
-import { RegisterContext } from "../../../contexts/registerContext"
 import { CustomColorsForm } from "./CustonColorsForm"
-import { useNavigate } from "react-router-dom"
+import { RegisterContext } from "../../../contexts/registerContext"
+import { formAnimation } from "../../../animations"
 
 export const FavoriteColorForm = () => {
   const navigate = useNavigate()
@@ -17,10 +20,12 @@ export const FavoriteColorForm = () => {
   })
 
   return (
-    <FavoriteColorDiv previewColor={selectedOption} customPreviewColor={customSelectedOption}>
-      <FixedColorsForm/>
-      <CustomColorsForm/>
-      <div className="previewDiv" />
-    </FavoriteColorDiv>
+    <m.div variants={formAnimation} animate="enter" exit="exit">
+      <FavoriteColorDiv previewColor={selectedOption} customPreviewColor={customSelectedOption}>
+        <FixedColorsForm />
+        <CustomColorsForm />
+        <div className="previewDiv" />
+      </FavoriteColorDiv>
+    </m.div>
   )
 }
