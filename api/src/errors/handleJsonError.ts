@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express"
-import AppError from "./AppError"
 
 export const handleJsonError = (
   err: Error,
