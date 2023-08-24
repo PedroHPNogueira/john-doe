@@ -11,7 +11,10 @@ const setDataSourceConfig = (): DataSourceOptions => {
 
   const isDockerCompose = process.env.DOCKER_COMPOSE
 
-  if (isDockerCompose) {
+  console.log(isDockerCompose)
+
+  if (isDockerCompose == "true") {
+    console.log("aqui")
     return {
       type: "postgres",
       url: process.env.DATABASE_URL,
@@ -19,17 +22,18 @@ const setDataSourceConfig = (): DataSourceOptions => {
       entities: [entitiesPath],
       migrations: [migrationsPath],
     }
-  }
-
-  return {
-    type: "postgres",
-    host: process.env.PGHOST,
-    password: process.env.PGPASSWORD,
-    port: port,
-    database: process.env.PGDATABASE,
-    synchronize: false,
-    entities: [entitiesPath],
-    migrations: [migrationsPath],
+  } else {
+    console.log("Outro")
+    return {
+      type: "postgres",
+      host: process.env.PGHOST,
+      password: process.env.PGPASSWORD,
+      port: port,
+      database: process.env.PGDATABASE,
+      synchronize: false,
+      entities: [entitiesPath],
+      migrations: [migrationsPath],
+    }
   }
 }
 

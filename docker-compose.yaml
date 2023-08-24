@@ -1,0 +1,27 @@
+version: '1'
+services:
+  postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    container_name: postgres
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+  register-page:
+    image: pedrohpnogueira/register-page
+    ports:
+      - 3000:3000
+    container_name: register-page
+    restart: unless-stopped
+    env_file: .env
+  register-api:
+    image: pedrohpnogueira/john-doe-api
+    ports:
+      - 4000:4000
+    container_name: api
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    env_file: .env
